@@ -20,6 +20,12 @@ const contactSchema = new Schema({
   mobileNo: {
     type: String,
   },
+
+  contactType: {
+    type: String,
+    enum: ['personal', 'professional'],
+    default: 'personal',
+  },
 });
 
 const Contact = mongoose.model('Contact', contactSchema);
