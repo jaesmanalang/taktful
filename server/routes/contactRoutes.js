@@ -1,4 +1,5 @@
 import express from 'express';
+import protect from '../middlewares/authMiddleware.js';
 import {
   getContacts,
   createContact,
@@ -12,14 +13,14 @@ const router = express.Router();
 // prettier-ignore
 router
   .route('/')
-  .get(getContacts)
-  .post(createContact);
+  .get(protect, getContacts)
+  .post(protect, createContact);
 
 // prettier-ignore
 router
   .route('/:id')
-  .get(getContact)
-  .put(updateContact)
-  .delete(deleteContact);
+  .get(protect, getContact)
+  .put(protect, updateContact)
+  .delete(protect, deleteContact);
 
 export default router;
