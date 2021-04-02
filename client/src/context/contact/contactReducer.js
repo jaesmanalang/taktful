@@ -1,9 +1,4 @@
-import {
-  CREATE_CONTACT,
-  GET_CONTACTS,
-  UPDATE_CONTACT,
-  DELETE_CONTACT,
-} from './contactTypes';
+import { CREATE_CONTACT, GET_CONTACTS } from './contactTypes';
 
 const contactReducer = (state, action) => {
   switch (action.type) {
