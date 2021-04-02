@@ -5,7 +5,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon app.js"
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "dev": "concurrently --kill-others \"npm run server\" \"cd ../client && npm start\""
   },
   "author": "James Manalang",
   "license": "ISC",
