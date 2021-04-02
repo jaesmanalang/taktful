@@ -1,16 +1,19 @@
 import React from 'react';
 import { ContactProvider } from './context/contact/contactContext';
-import ContactList from './components/ContactList';
+import Navbar from './components/Navbar/Navbar';
+import ContactForm from './components/Contact/ContactForm';
+import ContactList from './components/Contact/ContactList';
+import './App.css';
 
 const App = () => {
   return (
-    <React.Fragment>
-      <ContactProvider>
-        <h1>App</h1>
-        <hr />
+    <ContactProvider>
+      <Navbar />
+      <div className="container">
+        <ContactForm />
         <ContactList />
-      </ContactProvider>
-    </React.Fragment>
+      </div>
+    </ContactProvider>
   );
 };
 

@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
-import ContactContext from '../context/contact/contactContext';
+import ContactContext from '../../context/contact/contactContext';
+import ContactItem from './ContactItem';
 
 const ContactList = () => {
   const { contacts } = useContext(ContactContext);
+
   return (
     <React.Fragment>
       {contacts.map(contact => (
-        <h1 key={contact._id}>{contact.name}</h1>
+        <ContactItem key={contact._id} contact={contact} />
       ))}
     </React.Fragment>
   );

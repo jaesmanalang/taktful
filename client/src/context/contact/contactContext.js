@@ -12,22 +12,26 @@ export const ContactProvider = ({ children }) => {
     error: null,
   };
 
+  const [state, dispatch] = useReducer(contactReducer, initialState);
+
   useEffect(() => {
     fetchContacts();
   }, []);
 
-  const [state, dispatch] = useReducer(contactReducer, initialState);
-
   const createContact = async contact => {
-    const { data } = await axios.post('/api/v1/contacts/', {
-      contact,
-    });
+    try {
+      const res = await axios.post(
+        'http://localhost:5000/api/v1/contacts/',
+        contact
+      );
 
-    dispatch({ type: CREATE_CONTACT, payload: data.createdContact });
+      dispatch({ type: CREATE_CONTACT, payload: res.data.contact });
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const fetchContacts = async () => {
-    console.log('fetch contact has been called');
     const { data } = await axios.get('/api/v1/contacts/');
     dispatch({ type: GET_CONTACTS, payload: data.contacts });
   };
