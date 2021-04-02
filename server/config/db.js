@@ -14,6 +14,7 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
+      useCreateIndex: true,
     });
   } catch (err) {
     console.error(`Initial connection error: ${err}`);

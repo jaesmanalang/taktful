@@ -39,15 +39,6 @@ const userSchema = new Schema({
       message: 'Passwords are not the same',
     },
   },
-
-  contacts: [
-    {
-      contact: {
-        type: Schema.Types.ObjectId,
-        ref: 'Contact',
-      },
-    },
-  ],
 });
 
 userSchema.pre('save', async function (next) {

@@ -1,13 +1,36 @@
-import User from '../models/User.js';
 import ash from 'express-async-handler';
+import generateToken from '../utils/generateToken.js';
+import User from '../models/User.js';
 
-export const createUser = ash(async (req, res, next) => {
+export const register = ash(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).json({ message: 'Email already exist' });
 
   const newUser = await User.create(req.body);
   res.status(201).json({
-    newUser,
+    _id: newUser._id,
+    firstName: newUser.firstName,
+    lastName: newUser.lastName,
+    email: newUser.email,
+    contacts: newUser.contacts,
+  });
+});
+
+export const login = ash(async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Please enter email and password' });
+  }
+
+  const user = await User.findOne({ email }).select('+password');
+  if (!user || !(await user.correctPassword(password))) {
+    return res.status(401).json({ message: 'Incorrect email or password' });
+  }
+
+  const token = generateToken(user._id);
+
+  res.status(200).json({
+    token,
   });
 });
 

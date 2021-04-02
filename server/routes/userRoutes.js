@@ -1,6 +1,7 @@
 import express from 'express';
 import {
-  createUser,
+  register,
+  login,
   getUsers,
   getUser,
   updateUser,
@@ -9,11 +10,13 @@ import {
 
 const router = express.Router();
 
+router.post('/register', register);
+router.post('/login', login);
+
 // prettier-ignore
 router
   .route('/')
   .get(getUsers)
-  .post(createUser);
 
 // prettier-ignore
 router

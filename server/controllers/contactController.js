@@ -2,7 +2,7 @@ import ash from 'express-async-handler';
 import Contact from '../models/Contact.js';
 
 export const getContacts = ash(async (req, res, next) => {
-  const contacts = await Contact.find({});
+  const contacts = await Contact.find({ user: req.user._id });
 
   res.status(200).json({
     contacts,
@@ -10,12 +10,20 @@ export const getContacts = ash(async (req, res, next) => {
 });
 
 export const createContact = ash(async (req, res, next) => {
-  const createdContact = await Contact.create(req.body);
-  if (!createdContact)
-    return res.status(400).json({ message: 'Cannot create a contact' });
+  const { name, email, mobileNo, contactType } = req.body;
+
+  const newContact = new Contact({
+    user: req.user._id,
+    name,
+    email,
+    mobileNo,
+    contactType,
+  });
+
+  const contact = await newContact.save();
 
   res.status(201).json({
-    createdContact,
+    contact,
   });
 });
 
