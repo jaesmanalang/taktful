@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContactProvider } from './context/contact/contactContext';
 import Navbar from './components/Navbar/Navbar';
+import ContactContainer from './components/Contact/ContactContainer';
 import ContactForm from './components/Contact/ContactForm';
 import ContactList from './components/Contact/ContactList';
 import './App.css';
@@ -9,10 +10,10 @@ const App = () => {
   return (
     <ContactProvider>
       <Navbar />
-      <div className="container">
+      <ContactContainer>
         <ContactForm />
         <ContactList />
-      </div>
+      </ContactContainer>
     </ContactProvider>
   );
 };
