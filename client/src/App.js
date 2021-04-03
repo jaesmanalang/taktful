@@ -1,20 +1,36 @@
-import React from 'react';
-import { ContactProvider } from './context/contact/contactContext';
+import React, { useContext } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import AuthContext from './context/auth/authContext';
 import Navbar from './components/Navbar/Navbar';
-import ContactContainer from './components/Contact/ContactContainer';
-import ContactForm from './components/Contact/ContactForm';
-import ContactList from './components/Contact/ContactList';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
 
 const App = () => {
+  const { state } = useContext(AuthContext);
   return (
-    <ContactProvider>
+    <Router>
       <Navbar />
-      <ContactContainer>
-        <ContactForm />
-        <ContactList />
-      </ContactContainer>
-    </ContactProvider>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route
+          exact
+          path="/login"
+          render={() => (state.user ? <Redirect to="/" /> : <Login />)}
+        />
+        <Route
+          exact
+          path="/register"
+          render={() => (state.user ? <Redirect to="/" /> : <Register />)}
+        />
+      </Switch>
+    </Router>
   );
 };
 
