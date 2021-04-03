@@ -1,18 +1,22 @@
 import ash from 'express-async-handler';
+import HttpError from '../utils/HttpError.js';
 import generateToken from '../utils/generateToken.js';
 import User from '../models/User.js';
 
 export const register = ash(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).json({ message: 'Email already exist' });
+  if (user) return next(new HttpError('Email already exists', 400));
 
   const newUser = await User.create(req.body);
   res.status(201).json({
-    _id: newUser._id,
-    firstName: newUser.firstName,
-    lastName: newUser.lastName,
-    email: newUser.email,
-    contacts: newUser.contacts,
+    message: 'Registered successfully',
+    user: {
+      _id: newUser._id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      contacts: newUser.contacts,
+    },
   });
 });
 

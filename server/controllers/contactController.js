@@ -2,25 +2,26 @@ import ash from 'express-async-handler';
 import Contact from '../models/Contact.js';
 
 export const getContacts = ash(async (req, res, next) => {
-  const contacts = await Contact.find({ user: req.user._id });
-
+  // const contacts = await Contact.find({ user: req.user._id });
+  const contacts = await Contact.find({});
   res.status(200).json({
     contacts,
   });
 });
 
 export const createContact = ash(async (req, res, next) => {
-  const { name, email, mobileNo, contactType } = req.body;
+  // const { name, email, mobileNo, contactType } = req.body;
+  const contact = await Contact.create(req.body);
 
-  const newContact = new Contact({
-    user: req.user._id,
-    name,
-    email,
-    mobileNo,
-    contactType,
-  });
+  // const newContact = new Contact({
+  //   user: req.user._id,
+  //   name,
+  //   email,
+  //   mobileNo,
+  //   contactType,
+  // });
 
-  const contact = await newContact.save();
+  // const contact = await newContact.save();
 
   res.status(201).json({
     contact,

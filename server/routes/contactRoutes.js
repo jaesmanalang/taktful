@@ -13,8 +13,8 @@ const router = express.Router();
 // prettier-ignore
 router
   .route('/')
-  .get(protect, getContacts)
-  .post(protect, createContact);
+  .get(getContacts)
+  .post(createContact);
 
 // prettier-ignore
 router

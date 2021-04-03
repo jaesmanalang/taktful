@@ -17,14 +17,14 @@ const contactSchema = new Schema({
     type: String,
   },
 
-  mobileNo: {
+  phone: {
     type: String,
   },
 
   contactType: {
     type: String,
-    enum: ['personal', 'professional'],
-    default: 'personal',
+    enum: ['Personal', 'Professional'],
+    default: 'Personal',
   },
 });
 
