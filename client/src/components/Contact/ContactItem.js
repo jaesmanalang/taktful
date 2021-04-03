@@ -22,7 +22,15 @@ const ContactItem = ({ contact }) => {
           {contact.phone ? contact.phone : 'N/A'}
         </p>
       </Box>
-      <p>{contact.contactType}</p>
+      <span
+        className={
+          contact.contactType === 'Personal'
+            ? styles.Personal
+            : styles.Professional
+        }
+      >
+        {contact.contactType}
+      </span>
     </div>
   );
 };

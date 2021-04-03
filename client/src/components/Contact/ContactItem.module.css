@@ -28,6 +28,23 @@
   margin-left: 0.85rem;
 }
 
+.Personal,
+.Professional {
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  width: max-content;
+  color: rgb(240, 224, 137);
+}
+
+.Personal {
+  background: rgb(12, 145, 223);
+}
+
+.Professional {
+  background: rgb(128, 37, 212);
+}
+
 @media screen and (max-width: 600px) {
   .ContactItem {
     font-size: 1rem;
