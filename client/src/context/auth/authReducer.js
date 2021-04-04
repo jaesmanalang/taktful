@@ -28,12 +28,13 @@ const authReducer = (state, action) => {
         error: action.payload,
       };
 
-    case 'SET_USER':
+    case 'LOGOUT_USER':
+      localStorage.clear();
       return {
         ...state,
-        user: action.payload.user,
-        token: action.payload.token,
-        isAuthenticated: action.payload.isAuthenticated,
+        user: null,
+        token: null,
+        isAuthenticated: false,
       };
 
     default:

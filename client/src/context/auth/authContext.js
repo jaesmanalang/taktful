@@ -1,5 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { createContext, useReducer } from 'react';
 import axios from 'axios';
 import authReducer from './authReducer';
 

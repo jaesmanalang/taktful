@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../context/auth/authContext';
+import Loading from '../components/Loading/Loading';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -35,12 +36,12 @@ const useStyles = makeStyles(theme => ({
 
 const SignIn = () => {
   const { state, login } = useContext(AuthContext);
-  const history = useHistory();
-  const { register, handleSubmit, errors, reset, setError } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
   const classes = useStyles();
 
   const onSubmit = async data => {
     login(data);
+    reset();
   };
 
   return state.user === null ? (
@@ -55,6 +56,7 @@ const SignIn = () => {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <TextField
+            className={classes.submit}
             variant="outlined"
             fullWidth
             id="email"
@@ -93,8 +95,10 @@ const SignIn = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={state.loading}
           >
-            Sign In
+            <span>Sign In</span>
+            {state.loading && <Loading />}
           </Button>
           <Grid container>
             <Grid item>
