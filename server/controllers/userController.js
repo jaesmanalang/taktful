@@ -9,7 +9,7 @@ export const register = ash(async (req, res, next) => {
 
   const newUser = await User.create(req.body);
   res.status(201).json({
-    message: 'Registered successfully',
+    message: 'Registration successful!',
     user: {
       _id: newUser._id,
       firstName: newUser.firstName,
