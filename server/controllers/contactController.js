@@ -10,13 +10,13 @@ export const getContacts = ash(async (req, res, next) => {
 });
 
 export const createContact = ash(async (req, res, next) => {
-  const { name, email, mobileNo, contactType } = req.body;
+  const { name, email, phone, contactType } = req.body;
 
   const newContact = new Contact({
     user: req.user._id,
     name,
     email,
-    mobileNo,
+    phone,
     contactType,
   });
 
